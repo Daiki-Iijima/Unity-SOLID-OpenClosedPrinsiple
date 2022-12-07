@@ -5,7 +5,6 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float lifeTime = 2f;
 
     private bool isLaunch = false;
 
@@ -22,11 +21,6 @@ public class Missile : MonoBehaviour
     }
 
     private void Update() {
-        //  w’è‚µ‚½ŠÔŒo‰ß‚µ‚Ä‚¢‚½‚çÁ‹
-        if(elapsedTime >= lifeTime) {
-            Destroy(this.gameObject);
-        }
-
         if (isLaunch) {
             //  Šp“x‚ğ‘ÎÛ‚ÉŒü‚¯‚é
             this.transform.LookAt(target.transform, Vector3.up);

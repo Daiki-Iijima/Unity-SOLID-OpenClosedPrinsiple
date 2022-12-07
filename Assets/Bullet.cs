@@ -9,7 +9,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float lifeTime = 2f;
 
     private bool isLaunch = false;
     private Vector3 direction;
@@ -25,11 +24,6 @@ public class Bullet : MonoBehaviour
     }
 
     private void Update() {
-
-        if(elapsedTime >= lifeTime) {
-            Destroy(this.gameObject);
-        }
-
         if (isLaunch) {
             this.transform.position += speed * Time.deltaTime * direction;
             elapsedTime += Time.deltaTime;

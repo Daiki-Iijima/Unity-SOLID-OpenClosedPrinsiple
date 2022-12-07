@@ -8,7 +8,7 @@ using UnityEngine;
 /// Closed : 振る舞いの変更(発射する武器の種類の追加)をしても、既存の処理に影響を与える可能性がないか？
 /// 新しい武器を追加すると、FireWeaponメソッドのif文が増え(閉じていない)、追加した武器のスクリプトの定義を追加していく必要がある(開いていない)
 /// </summary>
-public class Weapon : MonoBehaviour
+public class BadWeapon : MonoBehaviour
 {
     /// <summary>
     /// 弾のプレファブ
@@ -28,6 +28,8 @@ public class Weapon : MonoBehaviour
     /// 発射間隔
     /// </summary>
     [SerializeField] private float fireRefreshRate = 1f;
+
+    [SerializeField] private float lifeTime = 2f;
 
     /// <summary>
     /// 次の発射可能までの時間
@@ -55,10 +57,14 @@ public class Weapon : MonoBehaviour
         //  問題点1 : 武器の種類が増えるたびに、if文が増えていく、既存のコードを変更する必要がある
         if (bulletPrefab != null) {
             Bullet bullet = Instantiate(bulletPrefab);
+            //  生存時間を設定
+            Destroy(bullet.gameObject, lifeTime);
             //  発射
             bullet.Launch(transform.forward);
         } else if (missilePrefab != null) {
             Missile missile = Instantiate(missilePrefab);
+            //  生存時間を設定
+            Destroy(missile.gameObject, lifeTime);
             missile.SetTarget(target);
         }
     }
